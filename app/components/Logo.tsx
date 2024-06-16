@@ -8,6 +8,7 @@ const Logo = () => {
 
   return (
     <Image
+      priority
       alt="logo"
       className="hidden cursor-pointer md:block"
       height="100"
