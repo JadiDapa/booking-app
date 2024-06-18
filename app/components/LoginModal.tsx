@@ -12,10 +12,12 @@ import { FcGoogle } from "react-icons/fc";
 import { AiFillGithub } from "react-icons/ai";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import useRegisterModal from "../hooks/useRegisterModal";
 
 const LoginModal = () => {
   const router = useRouter();
   const loginModal = useLoginModal();
+  const registerModal = useRegisterModal();
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
@@ -47,6 +49,11 @@ const LoginModal = () => {
         toast.error(callback.error);
       }
     });
+  };
+
+  const switchRegister = () => {
+    loginModal.onClose();
+    registerModal.onOpen();
   };
 
   const bodyContent = (
@@ -90,7 +97,7 @@ const LoginModal = () => {
         <div className="flex flex-row items-center justify-center gap-2">
           <div className="">Don&apos;t have an account?</div>
           <div
-            onClick={loginModal.onClose}
+            onClick={switchRegister}
             className="cursor-pointer text-neutral-800 transition hover:text-rose-500 hover:underline"
           >
             Register

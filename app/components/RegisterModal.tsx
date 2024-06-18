@@ -12,9 +12,11 @@ import Button from "./Button";
 import { FcGoogle } from "react-icons/fc";
 import { AiFillGithub } from "react-icons/ai";
 import { signIn } from "next-auth/react";
+import useLoginModal from "../hooks/useLoginModal";
 
 const RegisterModal = () => {
   const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
@@ -44,6 +46,11 @@ const RegisterModal = () => {
       .finally(() => {
         setIsLoading(false);
       });
+  };
+
+  const switchRegister = () => {
+    registerModal.onClose();
+    loginModal.onOpen();
   };
 
   const bodyContent = (
@@ -95,7 +102,7 @@ const RegisterModal = () => {
         <div className="flex flex-row items-center justify-center gap-2">
           <div className="">Already have an account?</div>
           <div
-            onClick={registerModal.onClose}
+            onClick={switchRegister}
             className="cursor-pointer text-neutral-800 transition hover:text-rose-500 hover:underline"
           >
             Login

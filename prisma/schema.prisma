@@ -39,7 +39,7 @@ model Account {
   providerAccountId String
   refresh_token     String? @db.String
   access_token      String? @db.String
-  expired_at        Int?
+  expires_at        Int?
   token_type        String?
   scope             String?
   id_token          String? @db.String
@@ -54,13 +54,14 @@ model Listing {
   id            String  @id @default(auto()) @map("_id") @db.ObjectId
   userId        String? @db.ObjectId
   title         String
-  descriptiton  String
+  description   String
   imageSrc      String
   category      String
   roomCount     Int
   bathroomCount Int
   guestCount    Int
-  locationValue String
+  location      String
+  price         Int
 
   createdAt DateTime @default(now())
 
