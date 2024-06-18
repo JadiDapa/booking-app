@@ -27,6 +27,8 @@ model User {
   accounts     Account[]
   listings     Listing[]
   reservations Reservation[]
+
+  @@map("users")
 }
 
 model Account {
@@ -43,7 +45,7 @@ model Account {
   id_token          String? @db.String
   session_state     String?
 
-  User User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -62,7 +64,7 @@ model Listing {
 
   createdAt DateTime @default(now())
 
-  User         User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
   reservations Reservation[]
 }
 
@@ -75,6 +77,6 @@ model Reservation {
   totalPrice Int
   createdAt  DateTime @default(now())
 
-  User    User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  Listing Listing? @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  user    User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  listing Listing? @relation(fields: [listingId], references: [id], onDelete: Cascade)
 }
